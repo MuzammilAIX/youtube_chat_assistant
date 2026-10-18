@@ -1,0 +1,28 @@
+# --- Secrets (NEVER commit) ---
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# --- Data ---
+data/chats/
+data/videos.json
+data/index/
+data/indexes/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log

@@ -1,0 +1,7 @@
+{
+  "video_id": "NdlzdPs0QBQ",
+  "document_count": 27,
+  "embedding_model": "text-embedding-3-small",
+  "chunk_size": 1000,
+  "chunk_overlap": 200
+}

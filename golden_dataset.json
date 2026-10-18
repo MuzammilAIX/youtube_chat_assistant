@@ -1,0 +1,18 @@
+[
+  {
+    "question": "What is the main topic of this video?",
+    "answer": "A tutorial on how to use the Streamlit AppTest framework for UI testing."
+  },
+  {
+    "question": "Summarize the video in exactly 3 bullet points.",
+    "answer": "1. AppTest simulates user actions without a browser. 2. It can click buttons and set input values. 3. It checks for exceptions and element states."
+  },
+  {
+    "question": "What does the speaker say about 'chat_input'?",
+    "answer": "The speaker explains that chat_input values clear after every re-run, just like in a real app."
+  },
+  {
+    "question": "What is the capital of France?",
+    "answer": "I couldn't find enough evidence in this video's transcript to answer that."
+  }
+]
