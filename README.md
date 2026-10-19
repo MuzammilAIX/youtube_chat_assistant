@@ -1,54 +1,51 @@
-# YouTube RAG Assistant
+# TubeMind AI — YouTube RAG Assistant
 
-A portfolio project that answers questions about YouTube videos using transcript retrieval, embeddings, FAISS, LangChain, OpenAI, and Streamlit.
+TubeMind AI is an AI-powered YouTube assistant that lets users analyze video transcripts, generate summaries, explore key insights, and ask questions with source-grounded answers and timestamps.
+
+**Live Demo:** [Try TubeMind AI](https://your-app-name.streamlit.app)
 
 ## Features
-- Fetches a video's transcript from YouTube
-- Splits transcript text into chunks and preserves approximate timestamps
-- Creates and persists a FAISS vector index
-- Retrieves relevant chunks for a question
-- Generates answers grounded in retrieved transcript evidence
-- Displays source chunks and clickable YouTube timestamps
-- Includes basic automated tests
 
-## Requirements
-- Python 3.12 recommended
-- An OpenAI API key with API access and billing configured
-- Network access to YouTube and OpenAI
+- **Video Analysis:** Process YouTube videos using their available transcripts.
+- **AI-Powered Q&A:** Ask questions and receive context-aware answers.
+- **Smart Summaries:** Extract key takeaways, important topics, and action items.
+- **Source-Based Responses:** Explore supporting transcript excerpts and timestamps.
+- **Interactive Chat:** Maintain conversations and revisit previously analyzed videos.
+- **Streamlit Interface:** Use a clean, interactive workspace for video analysis.
 
-## Setup (Windows PowerShell)
-```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-Copy-Item .env.example .env
-```
-Open `.env` and replace `OPENAI_API_KEY` with your own key. Never commit `.env`.
+## Tech Stack
 
-## Run
-```powershell
-$env:PYTHONPATH = "src"
+Python · Streamlit · LangChain · OpenAI · Embeddings · FAISS · Retrieval-Augmented Generation (RAG)
+
+## How It Works
+
+1. Submit a YouTube video URL.
+2. Retrieve and process the available transcript.
+3. Split the transcript into chunks and create vector embeddings.
+4. Store and retrieve relevant content using FAISS.
+5. Generate answers and summaries grounded in retrieved video content.
+
+## Run Locally
+
+```bash
+git clone https://github.com/MuzammilAIX/youtube-rag-assistant.git
+cd youtube-rag-assistant
+
+python -m venv .venv
+.venv\Scripts\activate
+
+pip install -r requirements.txt
 streamlit run app/streamlit_app.py
 ```
-Enter a YouTube URL or video ID in the sidebar, index it, then ask questions.
 
-## Test
-```powershell
-$env:PYTHONPATH = "src"
-python -m pytest -q
-```
+Configure your required API keys in a `.env` file before running the application.
 
-## What goes in `data/`?
-The app creates these automatically:
-- `faiss_index/`: `index.faiss` and `index.pkl`, the local vector index and document store
-- `manifest.json`: embedding model and chunking metadata
+## Project Goal
 
-You do not need to download a separate dataset. The transcript is fetched from YouTube at indexing time. The generated index is excluded from Git.
+Built to demonstrate practical AI engineering skills in LLM integration, retrieval-augmented generation, semantic search, transcript processing, and interactive application deployment.
 
-## Important notes
-- Transcript availability depends on the video and YouTube's current access behavior.
-- Timestamp assignment to character chunks is approximate; for higher accuracy, split on transcript segments and preserve exact segment boundaries.
-- The local FAISS `index.pkl` is loaded with pickle deserialization. Only load an index that your own application generated and that you trust.
-- This initial version builds one active index at a time. It overwrites the current index when another video is indexed. Multi-video collections and safe index versioning are future improvements.
-- The prompt asks the model to cite source labels, but LLM citations must still be checked against the displayed source chunks.
+## Author
+
+**Muhammad Muzammal Hussain (MuzammilAIX)**
+
+[GitHub Profile](https://github.com/MuzammilAIX)
