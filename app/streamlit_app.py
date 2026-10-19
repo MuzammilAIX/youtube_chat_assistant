@@ -41,6 +41,73 @@ st.set_page_config(
 
 
 # =============================================================================
+# PASSWORD GATE — blocks access before anything else renders
+# =============================================================================
+def _check_password() -> bool:
+    """
+    Simple password gate.
+
+    Reads expected password from (in order):
+      1. st.secrets["APP_PASSWORD"]  (used on Streamlit Cloud)
+      2. os.environ["APP_PASSWORD"]   (used locally via .env)
+
+    If neither is configured, gate is DISABLED (dev convenience).
+    On deployment, always set APP_PASSWORD in st.secrets.
+    """
+    expected = None
+    try:
+        expected = st.secrets.get("APP_PASSWORD")
+    except Exception:
+        pass
+    if not expected:
+        import os
+        expected = os.getenv("APP_PASSWORD", "")
+
+    if not expected:
+        # No password configured → allow (local dev convenience)
+        return True
+
+    if st.session_state.get("_authed"):
+        return True
+
+    # ---- Render gate ----
+    st.markdown(
+        """
+        <div style="max-width:380px;margin:12vh auto 0 auto;padding:28px 26px;
+                    border:1px solid rgba(128,128,128,0.25);border-radius:16px;
+                    background:rgba(128,128,128,0.04);text-align:center;">
+            <div style="font-size:2rem;margin-bottom:8px;">🔒</div>
+            <div style="font-size:1.25rem;font-weight:700;margin-bottom:4px;">
+                TubeMind AI
+            </div>
+            <div style="font-size:0.88rem;color:#8a8f98;margin-bottom:18px;">
+                Enter the access password to continue.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    col_l, col_m, col_r = st.columns([1, 2, 1])
+    with col_m:
+        pwd = st.text_input(
+            "Password", type="password", label_visibility="collapsed",
+            key="_pwd_input",
+        )
+        if st.button("Enter", type="primary", use_container_width=True):
+            if pwd == expected:
+                st.session_state["_authed"] = True
+                st.rerun()
+            else:
+                st.error("Incorrect password.")
+    return False
+
+
+if not _check_password():
+    st.stop()
+
+
+# =============================================================================
 # RED YOUTUBE LOGO (pure CSS)
 # =============================================================================
 _YOUTUBE_LOGO_HTML = (
