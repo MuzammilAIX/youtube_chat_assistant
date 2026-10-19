@@ -2,7 +2,7 @@
 
 TubeMind AI is an AI-powered YouTube assistant that lets users analyze video transcripts, generate summaries, explore key insights, and ask questions with source-grounded answers and timestamps.
 
-**Live Demo:** [Try TubeMind AI](https://your-app-name.streamlit.app)
+**Live Demo:** [Try TubeMind AI](https://youtubechatassistant-fm87caqemn3ugmml75bweo.streamlit.app/)
 
 ## Features
 
